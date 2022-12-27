@@ -2,8 +2,15 @@ import React from 'react';
 import Post from './Post';
 import TweetBox from './TweetBox';
 import './Feed.css';
+import { useQuery } from './lib/wundergraph';
 
 function Feed () {
+  const tweets = useQuery({
+    operationName: 'GetTweets',
+    liveQuery: true,
+    requiresAuthentication: false
+  });
+
   const posts = [{
     displayName : "Test User",
     username : "testuser",
@@ -19,7 +26,7 @@ function Feed () {
         <h2>Home</h2>
       </div>
       <TweetBox/>
-      {posts.map((tweet) => (
+      {tweets.data?.tweets_findManytweets?.map((tweet) => (
         <Post
           displayName={tweet.displayName}
           username={tweet.username}

@@ -1,0 +1,12 @@
+query GetTweets {
+  tweets_findManytweets {
+    id
+    displayName
+    username
+    verified
+    text
+    avatar
+    image
+    date
+  }
+}
