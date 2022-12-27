@@ -1,4 +1,5 @@
-# Getting Started with Create Twiiter Clone using WunderGraph
+# Getting Started with Twitter Clone using WunderGraph
+Prepared by: Sawmon Abossedgh and Jay Patel
 
 ## Contents
 
