@@ -2,18 +2,18 @@ import { configureWunderGraphApplication, cors, EnvironmentVariable, introspect,
 import server from './wundergraph.server';
 import operations from './wundergraph.operations';
 
-const countries = introspect.graphql({
-	apiNamespace: 'countries',
-	url: 'https://countries.trevorblades.com/',
+const tweets = introspect.mongodb({
+	apiNamespace: 'tweets',
+	databaseURL: 'mongodb+srv://user:pass@cluster0.jzgqp26.mongodb.net/Tweets',
+	introspection : {
+		pollingIntervalSeconds: 5,
+	},
 });
 
 // configureWunderGraph emits the configuration
 configureWunderGraphApplication({
 	apis: [
-		countries,
-		/*federatedApi,
-        openAPI,
-        graphQLAPI*/
+    tweets
 	],
 	server,
 	operations,
