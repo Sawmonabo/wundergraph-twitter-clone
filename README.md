@@ -1,4 +1,4 @@
-# Getting Started with Twitter Clone using WunderGraph
+# Getting Started with Twitter-Clone using WunderGraph
 Prepared by: Sawmon Abossedgh and Jay Patel
 
 <img align="right" width="250" height="220" src="https://user-images.githubusercontent.com/77422313/209737042-c726972d-1428-468f-904d-df84ba6149e0.png">
