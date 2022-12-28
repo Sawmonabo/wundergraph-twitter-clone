@@ -272,17 +272,17 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 	```
 * Next within Feed.js update the line within our div tag that calls .map() to
 	```
-	{getTweets.data?.tweets_findManytweets?.map((tweet) => (
-		<Post
-		  displayName={tweet.displayName}
-		  username={tweet.username}
-		  verified={tweet.verified}
-		  text={tweet.text}
-		  avatar={tweet.avatar}
-		  image={tweet.image}
-		  key={tweet.id}
-		/>
-	))}
+		{getTweets.data?.tweets_findManytweets?.map((tweet) => (
+			<Post
+			  displayName={tweet.displayName}
+			  username={tweet.username}
+			  verified={tweet.verified}
+			  text={tweet.text}
+			  avatar={tweet.avatar}
+			  image={tweet.image}
+			  key={tweet.id}
+			/>
+		))}
 	```
 * Now switch over to TweetBox.js and add the mutation operation, as well as update the sendTweet function to 
 	```
@@ -413,38 +413,38 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 	2. LogoutButton.js and LogoutButton.css
 	
 		```
-		# LogoutButton.js
+			# LogoutButton.js
 
-		import React from 'react';
-		import { useAuth } from '../lib/wundergraph';
-		import { Button } from '@mui/material';
-		import './LogoutButton.css';
+			import React from 'react';
+			import { useAuth } from '../lib/wundergraph';
+			import { Button } from '@mui/material';
+			import './LogoutButton.css';
 
-		const LogoutButton = () => {
-		  const { logout } = useAuth();
+			const LogoutButton = () => {
+			  const { logout } = useAuth();
 
-		  return (
-		      <Button onClick={ () => { logout({ logoutOpenidConnectProvider: true }); }} variant='contained' className='logout_button' fullWidth>
-			  Sign Out
-		      </Button>
-		  );
-		};
+			  return (
+			      <Button onClick={ () => { logout({ logoutOpenidConnectProvider: true }); }} variant='contained' className='logout_button' fullWidth>
+				  Sign Out
+			      </Button>
+			  );
+			};
 
-		export default LogoutButton;
+			export default LogoutButton;
 
 
-		# LogoutButton.css
+			# LogoutButton.css
 
-		.logout_button {
-		    background-color: var(--twitter-color) !important;
-		    border: none !important;
-		    color: white !important;
-		    font-weight: 700 !important;
-		    text-transform: inherit !important;
-		    border-radius: 20px !important;
-		    height: 50px !important;
-		    margin-top: 20px !important;
-		  }
+			.logout_button {
+			    background-color: var(--twitter-color) !important;
+			    border: none !important;
+			    color: white !important;
+			    font-weight: 700 !important;
+			    text-transform: inherit !important;
+			    border-radius: 20px !important;
+			    height: 50px !important;
+			    margin-top: 20px !important;
+			  }
 
 		```
 	
