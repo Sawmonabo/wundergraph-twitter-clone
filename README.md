@@ -7,7 +7,8 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 - [Twitter INIT](#twitter-init)
 - [WunderGraph INIT](#wundergraph-init)
 - [MongoDB INIT](#mongodb-init)
-- [Creating our First Mutation w/Tweets](#creating-our-first-mutation-wtweets)
+  - [Initializing our Twitter Feed with Live Query](initializing-our-twitter-feed-with-live-query) 
+  - [Creating our First Mutation w/Tweets](#creating-our-first-mutation-wtweets)
 
 ## Twitter INIT
 * First step to creating our Twitter clone is by opening up your terminal and cloning our repo using:
@@ -15,9 +16,46 @@ Prepared by: Sawmon Abossedgh and Jay Patel
   git clone https://github.com/Sawmonabo/wundergraph-twitter-clone.git
   ```
 * Once you clone the repo you're going to want to run the command ``` npm i ``` to download our current dependencies from our package.json
-* After installing the dependencies, go aheah and start the application with ``` npm start ``` to see what we have so far.
+* After installing the dependencies, go ahead and start the application with ``` npm start ``` to see what we have so far.
 
-<p> As you can see this will load up the skeleton structure of the Twitter-Clone. Before moving forward, lets take a look at Feed.js located within our src folder. On line 7 we are creating a const named post where we are currently assigning hard values to it and inserting it onto our twitter feed. In TweetBox.js, also within the src folder, is where users will be creating/sending their tweets. Once again we are currently assigning hard values to our user attributes and then capturing the input message or image link from the front-end. While the application is still running on localhost:3000 go ahead and open up the dev tools console. If you type in a message and click Tweet you'll be able to see the console log our input.
+<p> As you can see this will load up the skeleton structure of the Twitter-Clone. Before moving forward, lets take a look at Feed.js located within our src folder. In the code snipet below we are creating a const named post where we are currently assigning hard values to it and inserting it onto our twitter feed.
+  
+```  
+    const posts = [{
+    displayName : "Test User",
+    username : "testuser",
+    verified : true,
+    text : "This is the first tweet!",
+    avatar : null,
+    image : null
+  }];
+```
+In TweetBox.js, also within the src folder, is where users will be creating/sending their tweets. Once again we are currently assigning hard values to our user attributes 
+```
+    const user = {
+    avatarUrl : "",
+    email : "testuser@test.com",
+    firstName : "Test",
+    lastName : "User",
+    name : "Test User",
+  };
+  
+```
+and then capturing the inputed message or image url from the front-end to our sendTweet const. 
+```
+    const sendTweet = e => {
+    e.preventDefault();
+
+    if (tweetMessage) {
+      console.log(`Sending tweet with message: ${tweetMessage}`);
+      console.log(`Sending tweet with image: ${tweetImage}`);
+    }
+
+    setTweetMessage('');
+    setTweetImage('');
+  };
+```
+While the application is still running on localhost:3000 go ahead and open up the dev tools console. If you type in a message and click Tweet you'll be able to see the console log our input.
 
 
 ## WunderGraph INIT
@@ -26,4 +64,6 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 ## MongoDB INIT
 
 
-## Creating our First Mutation w/Tweets
+  ### Creating our First Mutation w/Tweets
+  
+  ### Initializing our Twitter Feed with Live Query
