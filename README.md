@@ -254,7 +254,7 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 * Now that the operation is written, run a ```wunderctl generate``` again to initialize our query/mutation funcitons with WunderGraph.
 
 
-## Implementing WunderGraph into Twitter-Clone
+## Implementing WunderGraph Operations into Twitter-Clone
 
 <p>Now we can add the calls to useQuery/useMutation from src/lib/wundergraph.ts into Feed.js and TweetBox.js. Adding these operations will allow our twitter feed to retrieve real data and create tweets with the db we just created.
 
