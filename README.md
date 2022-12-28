@@ -7,7 +7,7 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 - [Twitter INIT](#twitter-init)
 - [WunderGraph INIT](#wundergraph-init)
 - [MongoDB INIT](#mongodb-init)
-  - [Initializing our Twitter Feed with Live Query](initializing-our-twitter-feed-with-live-query) 
+  - [Initializing our Twitter Feed with Live Query](#initializing-our-twitter-feed-with-live-query) 
   - [Creating our First Mutation w/Tweets](#creating-our-first-mutation-wtweets)
 
 ## Twitter INIT
