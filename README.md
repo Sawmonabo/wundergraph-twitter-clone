@@ -59,7 +59,7 @@ While the application is still running on localhost:3000 go ahead and open up th
 
 
 ## WunderGraph INIT
-<p>Now that we have setup our skeleton structure for our Twitter-Clone let's move on to adding WunderGraph to our application to help simpilize our lives.
+<p>Now that we have setup our skeleton structure for our Twitter-Clone let's move on to adding WunderGraph to our application to help simpilify our lives.
 
 * First, let's start with opening up our terminal and typing the command:
   ```js
