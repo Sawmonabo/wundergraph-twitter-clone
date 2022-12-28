@@ -355,7 +355,165 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 	
 
 ## Implementing WunderGraph Auth0 into Twitter-Clone
+<p> To get started we need to create a new folder within our src directory named auth0_components.
 
+* Create these files within our auth0_components folder:
+	
+	1. LoginButton.js and LoginButton.css
+	
+	'''
+		# LoginButton.js
+	
+		import React from 'react';
+		import { useAuth } from '../lib/wundergraph';
+		import { Button } from '@mui/material';
+		import './LoginButton.css';
+
+		const LoginButton = () => {
+		  const { login } = useAuth();
+
+		  return (
+		    <Button className='login-button-container' onClick={() => { login('auth0'); }}>
+			Continue
+		    </Button>
+		  );
+		};
+
+		export default LoginButton;
+	
+		
+		# LoginButton.css
+	
+		.login-button-container {
+		    flex: 2;
+		    background-color: var(--twitter-color) !important;
+		    border: none !important;
+		    /* color: white !important; */
+		    color: rgb(34, 34, 34) !important;
+		    font-weight: 500 !important;
+		    text-transform: inherit !important;
+		    border-radius: 5px !important;
+		    height: 25px !important;
+		    text-align: center;
+		    justify-content: center;
+		    align-items: center;
+		    margin-right: 20px !important;
+		    margin-left: auto !important;
+		  }
+	'''
+	
+	2. LogoutButton.js and LogoutButton.css
+	
+	```
+	# LogoutButton.js
+	
+	import React from 'react';
+	import { useAuth } from '../lib/wundergraph';
+	import { Button } from '@mui/material';
+	import './LogoutButton.css';
+
+	const LogoutButton = () => {
+	  const { logout } = useAuth();
+
+	  return (
+	      <Button onClick={ () => { logout({ logoutOpenidConnectProvider: true }); }} variant='contained' className='logout_button' fullWidth>
+		  Sign Out
+	      </Button>
+	  );
+	};
+
+	export default LogoutButton;
+	
+	
+	# LogoutButton.css
+	
+	.logout_button {
+	    background-color: var(--twitter-color) !important;
+	    border: none !important;
+	    color: white !important;
+	    font-weight: 700 !important;
+	    text-transform: inherit !important;
+	    border-radius: 20px !important;
+	    height: 50px !important;
+	    margin-top: 20px !important;
+	  }
+	
+	```
+	
+	3. Auth.js and Auth.css
+	
+	```
+		# Auth.js
+	
+		import React from 'react';
+		import LoginButton from './LoginButton';
+		import './Auth.css';
+
+		function Auth () {
+		  return (
+		    <div className='Auth-form-container'>
+		      <div className='Auth-form'>
+			<div className='Auth-form-content'>
+			  <h1 className='Auth-form-title'>Twitter-Clone</h1>
+			  <h4 className='Auth-form-sub-title'>Sign-in w/Auth0</h4>
+			  <div className='button-container'>
+			    <LoginButton/>
+			  </div>
+			</div>
+		      </div>
+		    </div>
+		  );
+		}
+		export default Auth;
+	
+	
+	
+		# Auth.css
+	
+		  .Auth-form-container {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    width: 100vw;
+		    height: 100vh;
+		  }
+
+		  .Auth-form {
+		    width: 420px;
+		    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+		    padding-top: 30px;
+		    padding-bottom: 20px;
+		    border-radius: 8px;
+		    background-color: white;
+		  }
+
+		  .Auth-form-content {
+		    padding-left: 12%;
+		    padding-right: 12%;
+		  }
+
+		  .Auth-form-title {
+		    text-align: center;
+		    /* margin-bottom: 1em; */
+		    padding-bottom: 15px;
+		    font-size: 30px;
+		    color: var(--twitter-color);
+		    font-weight: 800;
+		  }
+
+		  .Auth-form-sub-title {
+		    text-align: center;
+		    font-size: 15px;
+		    font-weight: 600;
+		    color: rgb(34, 34, 34);
+		    margin-bottom: 1em;
+		  }
+
+		  .button-container {
+		    padding-left: 40%;
+		    padding-right: 20%;
+		  }
+	```
 
 	
 ## Final Working Version
