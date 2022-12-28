@@ -140,35 +140,44 @@ allowedOrigins:
 <p> Now let's hop back over to our code and configure our MongoDB cluster with our application
 	
 * First, lets update WG config (wundergraph.config.ts located in the .wundergraph folder) 
+	
 	1. For the new db...replace countries with: 
 
-	```
-	const tweets = introspect.mongodb({
-	apiNamespace: 'tweets',
-	databaseURL: 'mongodb+srv://user:pass@cluster0.uvkwxgc.mongodb.net/TweetsCollection',
-	introspection : {
-		pollingIntervalSeconds: 5,
-	},
+		```
+		const tweets = introspect.mongodb({
+		apiNamespace: 'tweets',
+		databaseURL: 'mongodb+srv://user:pass@cluster0.uvkwxgc.mongodb.net/TweetsCollection',
+		introspection : {
+			pollingIntervalSeconds: 5,
+			},
 
-});
-	```
+		});
+
+		```
 	
 	2. Update our apis array in config to:
-	```
-	   apis: [
-	      tweets
-	    ],
-	```
+	
+		```
+		   apis: [
+		      tweets
+		    ],
+		```
 * Second, after updating our WG config we need to run WunderGraphs amazing 'generate' command to initialize the setup. In your terminal run the following command ```  wunderctl generate ```.
 	
 * Third, we need to run the WG introspection to read our database schema and and generate WG operations for our database. Before running the command below be sure to update the mongo cluster address to the one we copied from [MongoDB Atlas](https://account.mongodb.com/account/login?nds=true&_ga=2.53799790.754773367.1672107021-1055546340.1672107021&_gac=1.45787478.1672107021.CjwKCAiAqaWdBhAvEiwAGAQltm3pdx2laKih-31DCbQo-U6e_PJ8aizwcctAqawCcZgH9pTUSjGnVRoCKi8QAvD_BwE). 
+	
 	* Run this command in your terminal: 
+	
 	```
 	wunderctl introspect mongodb mongodb+srv://<your-username>:<your-password>@cluster0.uvkwxgc.mongodb.net/<your-database-name>
 	```
+	
 * Fourth, after running our introspection we need to craete our prisma schema.
+	
 	1. In our root directory create a file named ``` schema.prisma ```.
+	
 	2. Add the following content to your prisma file:
+	
 		```
 			datasource db {
 			    provider = "mongodb"
