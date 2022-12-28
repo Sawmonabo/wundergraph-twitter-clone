@@ -286,6 +286,9 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 	```
 * Now switch over to TweetBox.js and add the mutation operation, as well as update the sendTweet function to 
 	```
+		# add import:
+		import { useMutation } from './lib/wundergraph';
+
 		 const { trigger } = useMutation({
 		    operationName: 'AddTweet',
 		    requiresAuthentication: true
@@ -555,7 +558,11 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 
 * Our final step is to switch over to TweetBox.js within our src directory and update our hardcoded user information to use user information from our generated cookie upon login.
 	```
+		# add to our existing import useUser:
+		import { useUser, useMutation } from './lib/wundergraph';
 	
+		# replace the const user with:
+		const user = useUser().data;
 	```
 	
 ## Final Working Version
