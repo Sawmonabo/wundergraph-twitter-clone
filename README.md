@@ -283,24 +283,24 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 * Now switch over to TweetBox.js and update the sendTweet function to 
 	```
 	    const sendTweet = e => {
-	    e.preventDefault();
+	    	e.preventDefault();
 
-	    if (tweetMessage) {
-	      trigger({
-		data: {
-		  displayName: user.firstName,
-		  username: user.firstName + '_' + user.lastName,
-		  verified: true,
-		  text: tweetMessage,
-		  avatar: user.avatarUrl,
-		  image: tweetImage,
-		  date: new Date()
-		}
-	      });
-	    }
+		    if (tweetMessage) {
+		      trigger({
+			data: {
+			  displayName: user.firstName,
+			  username: user.firstName + '_' + user.lastName,
+			  verified: true,
+			  text: tweetMessage,
+			  avatar: user.avatarUrl,
+			  image: tweetImage,
+			  date: new Date()
+			}
+		      });
+		    }
 
-	    setTweetMessage('');
-	    setTweetImage('');
+	    	setTweetMessage('');
+	   	setTweetImage('');
 	  };
 	```
 	
