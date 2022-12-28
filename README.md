@@ -105,9 +105,40 @@ allowedOrigins:
 				  ]
 				: ['http://localhost:3000'],
 ```
+	
 ## MongoDB INIT
+	
+* To get started with the MongoDB INIT we need to first start by creating an account or signing in with your existing account on [MongoDB Atlas](https://account.mongodb.com/account/login?nds=true&_ga=2.53799790.754773367.1672107021-1055546340.1672107021&_gac=1.45787478.1672107021.CjwKCAiAqaWdBhAvEiwAGAQltm3pdx2laKih-31DCbQo-U6e_PJ8aizwcctAqawCcZgH9pTUSjGnVRoCKi8QAvD_BwE)
 
+ <p>After creating or signing into your acount follow these steps:
+	 
+	1. Choose or create an organization, then click "New Project", give it a name, click "Create Project"
+	2. Click Add Current IP Address
+	3. Then click "Build a Database"
+		i. Choose Shared Free tier
+		ii. Allow default settings for the Cluster
+		iii. Click "Connect" to the cluster (Make sure it says that your IP Address has been added, this is very important!)
+	4. Choose a username and password for the database, SAVE THESE
+	5. Click next/continue
+	6. Choose "Connect using VSCode" and copy/save the connection string in the ( Connect to your MongoDB deployment ) text box. ex: mongodb+srv://user:<password>@cluster0.jzgqp26.mongodb.net/test
 
+<p> Before leaving the MongoDB website let's create a document for our twitter feed to represent an existing tweet.
+	
+* Click Create and then insert a document
+	```
+	  {"_id":
+	    {"$oid":"63816aaad38a36c5cfddaf06"},
+	    "displayName":"Test User",
+	    "username":"testuser",
+	    "verified":true,
+	    "text":"I love Wundergraph",
+	    "avatar":"https://images-ext-1.discordapp.net/external/FrhETDKgDLfwckbcNUU9Ap3gkzIIU9a6mYuFa69SXlA/https/www.shareicon.net/data/512x512/2016/09/15/829459_man_512x512.png",
+	    "date":{"$date":{"$numberLong":"1671955200000"}},
+	    "image":"https://avatars.githubusercontent.com/u/64281914?s=200&v=4"
+	  }
+	```
+
+	
   ### Creating our First Mutation w/Tweets
   
   ### Initializing our Twitter Feed with Live Query
