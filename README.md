@@ -7,7 +7,7 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 - [Twitter INIT](#twitter-init)
 - [WunderGraph INIT](#wundergraph-init)
 - [MongoDB INIT](#mongodb-init)
-- [Creating our First Mutation w/Tweets](#creating-our-first-mutation-w/-tweets)
+- [Creating our First Mutation w/Tweets](#creating-our-first-mutation-wtweets)
 
 ## Twitter INIT
 * First step to creating our Twitter clone is by opening up your terminal and cloning our repo using:
