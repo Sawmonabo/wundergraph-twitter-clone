@@ -284,28 +284,33 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 		/>
 	))}
 	```
-* Now switch over to TweetBox.js and update the sendTweet function to 
+* Now switch over to TweetBox.js and add the mutation operation, as well as update the sendTweet function to 
 	```
-	    const sendTweet = e => {
-	    	e.preventDefault();
+		 const { trigger } = useMutation({
+		    operationName: 'AddTweet',
+		    requiresAuthentication: true
+		  });
+		
+		  const sendTweet = e => {
+			e.preventDefault();
 
-		    if (tweetMessage) {
-		      trigger({
-			data: {
-			  displayName: user.firstName,
-			  username: user.firstName + '_' + user.lastName,
-			  verified: true,
-			  text: tweetMessage,
-			  avatar: user.avatarUrl,
-			  image: tweetImage,
-			  date: new Date()
-			}
-		      });
-		    }
+			    if (tweetMessage) {
+			      trigger({
+				data: {
+				  displayName: user.firstName,
+				  username: user.firstName + '_' + user.lastName,
+				  verified: true,
+				  text: tweetMessage,
+				  avatar: user.avatarUrl,
+				  image: tweetImage,
+				  date: new Date()
+				}
+			      });
+			    }
 
-	    	setTweetMessage('');
-	   	setTweetImage('');
-	  };
+			setTweetMessage('');
+			setTweetImage('');
+		  };
 	```
 	
 * Lastly, create an .env file in your root dir with contents:
@@ -515,7 +520,7 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 			  }
 		```
 
-* After creating the auth0 components we need to update our App.js within our src directory to configure Auth0 login/logout.
+<p>After creating the Auth0 components we need to update our App.js within our src directory to configure Auth0 login/logout. We can now also capture the user attributes from Auth0 using our WunderGraph hooks with useUsesr().
 	
 	```
 		import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -547,4 +552,10 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 
 		export default App;
 	```
+
+* Our final step is to switch over to TweetBox.js within our src directory and update our hardcoded user information to use user information from our generated cookie upon login.
+	```
+	
+	```
+	
 ## Final Working Version
