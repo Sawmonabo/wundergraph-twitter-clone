@@ -316,11 +316,41 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 	
   
 ## Auth0 INIT
+	
+<p> To get started with the MongoDB INIT we need to first start by creating an account or signing in with your existing account on [Auth0](https://auth0.auth0.com/u/login/identifier?state=hKFo2SBQZ3RaREhZTFNkbU1VQ250Z054UGItVmVVeTNOZWpmZKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDZfaVlSRFMwNXo5b0w3aXhLVUlGOTE2QkNtaVZUeFV4o2NpZNkgYkxSOVQ1YXI2bkZ0RE80ekVyR1hkb3FNQ000aU5aU1Y)
 
+ <p>After creating or signing into your Auth0 acount follow these steps:
+	 
+	1. Go to Auth0 and create a new application of type "Regular Web Application"
+	2. Skip the Quickstart
+	3. Copy the Issuer, Client ID and Client Secret to the clipboard
+	4. Rename the .example.env file to .env
+	5. Paste the credentials into the .env file
+	6. Set the Callback URL on Auth0 to http://localhost:9991/auth/cookie/callback/auth0
 	
 	
 ### Configuring WunderGraph with Auth0
 	
+<p> After setting up our Auth0 account we need to configure WunderGraph with it. 
+
+* Update the wundergraph.config.ts file located in the .wundergraph folder in the root directory
+ 
+	 ```
+	 	authentication: {
+			cookieBased: {
+			providers: [
+			authProviders.openIdConnect({
+				id: 'auth0',
+				issuer: new EnvironmentVariable('AUTH0_ISSUER'),
+				clientId: new EnvironmentVariable('AUTH0_CLIENT_ID'),
+				clientSecret: new EnvironmentVariable('AUTH0_CLIENT_SECRET')
+			})
+		      ],
+			 authorizedRedirectUris: ['http://localhost:3000/', 'http://127.0.0.1:3000/'],
+			},
+		},
+	 
+	 ```
 	
 	
 
