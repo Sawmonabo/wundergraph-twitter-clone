@@ -252,7 +252,7 @@ findManytweets query, that will be the one we use in our manually defined operat
 	```
 * Next within Feed.js update the line within our div tag that calls .map() to
 	```
-		{getTweets.data?.tweets_findManytweets?.map((tweet) => (
+	{getTweets.data?.tweets_findManytweets?.map((tweet) => (
 		<Post
 		  displayName={tweet.displayName}
 		  username={tweet.username}
@@ -262,8 +262,13 @@ findManytweets query, that will be the one we use in our manually defined operat
 		  image={tweet.image}
 		  key={tweet.id}
 		/>
-      		))}
+	))}
 	```
+	
+* Lastly, create an .env file in your root dir with contents:
+  ``` GENERATE_SOURCEMAP=false ```
+	
+* Let's check the results of the following by running ``` wunderctl up --debug ``` and once it loaded create a new terminal window and run ```npm start``` . You should now see our twitter feed now includes our tweet document we created withion our MongoDB database previously.
 	
   
  
