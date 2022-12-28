@@ -7,8 +7,12 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 - [Twitter INIT](#twitter-init)
 - [WunderGraph INIT](#wundergraph-init)
 - [MongoDB INIT](#mongodb-init)
-  - [Configuring WunderGraph Operations](#configuring-wundergraph-operations) 
+	- [Configuring WunderGraph Operations](#configuring-wundergraph-operations) 
 - [Implementing WunderGraph Operations into Twitter-Clone](#implementing-wundergraph-operations-into-twitter-clone)
+- [Auth0 INIT](#auth0-init)
+	- [Configuring WunderGraph with Auth0](#configuring-wundergraph-with-auth0) 
+- [Implementing WunderGraph Auth0 into Twitter-Clone](#implementing-wundergraph-auth0-into-twitter-clone)
+- [Final Working Version](#final-working-version)
 
 ## Twitter INIT
 * First step to creating our Twitter clone is by opening up your terminal and cloning our repo using:
@@ -307,7 +311,21 @@ findManytweets query and createOnetweets mutation, that will be the two we use i
 * Lastly, create an .env file in your root dir with contents:
   ``` GENERATE_SOURCEMAP=false ```
 	
-* Let's check the results of the following by running ``` wunderctl up --debug ``` and once it loaded create a new terminal window and run ```npm start``` . You should now see our twitter feed now includes our tweet document we created within our MongoDB database previously. You should now also be able to create a tweet and see it automatically upload into our twitter feed and MongoDB.
+* Let's check the results of the following by running ``` wunderctl up --debug ``` and once it loaded create a new terminal window and run ```npm start```. 
+<p>You should now see our twitter feed now includes our tweet document we created within our MongoDB database previously. You should now also be able to create a tweet and see it automatically upload into our twitter feed and MongoDB.
 	
   
- 
+## Auth0 INIT
+
+	
+	
+### Configuring WunderGraph with Auth0
+	
+	
+	
+
+## Implementing WunderGraph Auth0 into Twitter-Clone
+
+
+	
+## Final Version
