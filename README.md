@@ -8,7 +8,7 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 - [WunderGraph INIT](#wundergraph-init)
 - [MongoDB INIT](#mongodb-init)
   - [Initializing our Twitter Feed with Live Query](#initializing-our-twitter-feed-with-live-query) 
-  - [Creating our First Mutation w/Tweets](#creating-our-first-mutation-wtweets)
+- [Integreating WunderGraph with our Twitter-Clone](#integreating-wundergraph-with-our-twitter-clone)
 
 ## Twitter INIT
 * First step to creating our Twitter clone is by opening up your terminal and cloning our repo using:
@@ -21,7 +21,7 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 <p> As you can see this will load up the skeleton structure of the Twitter-Clone. Before moving forward, lets take a look at Feed.js located within our src folder. In the code snipet below we are creating a const named post where we are currently assigning hard values to it and inserting it onto our twitter feed.
   
 ```  
-    const posts = [{
+    const tweets = [{
     displayName : "Test User",
     username : "testuser",
     verified : true,
@@ -162,7 +162,7 @@ allowedOrigins:
 		      tweets
 		    ],
 		```
-* Second, after updating our WG config we need to run WunderGraphs amazing 'generate' command to initialize the setup. In your terminal run the following command ```  wunderctl generate ```.
+* Second, after updating our WG config we need to run WunderGraphs amazing 'generate' command to initialize the setup. In your terminal run the following command ```  wunderctl generate ```
 	
 * Third, we need to run the WG introspection to read our database schema and and generate WG operations for our database. Before running the command below be sure to update the mongo cluster address to the one we copied from [MongoDB Atlas](https://account.mongodb.com/account/login?nds=true&_ga=2.53799790.754773367.1672107021-1055546340.1672107021&_gac=1.45787478.1672107021.CjwKCAiAqaWdBhAvEiwAGAQltm3pdx2laKih-31DCbQo-U6e_PJ8aizwcctAqawCcZgH9pTUSjGnVRoCKi8QAvD_BwE). 
 	
@@ -215,7 +215,55 @@ allowedOrigins:
 			useAuth,
 		} = createHooks<Operations>(client)
 	```
+<p> If we take a look at the jsonchema.ts file in src/components/generated and look for the
+findManytweets query, that will be the one we use in our manually defined operation.
 	
-### Creating our First Mutation w/Tweets
+* Lets create our first operation using Wundergraph. 
+	1. Move into the directory .wundergraph/operations on the root directory.
+	2. Create a new file named 'GetTweets.graphql and create the query function
+		```
+		  query GetTweets {
+		    tweets_findManytweets {
+		      id
+		      displayName
+		      username
+		      verified
+		      text
+		      avatar
+		      image
+		      date
+		    }
+		}
+		```
+* Now that the operation is written, run a ```wunderctl generate``` again to initialize our query funciton with WunderGraph.
+
+
+## Integreating WunderGraph with our Twitter-Clone
+
+<p>Now we can add the call to useQuery into Feed.js so that our feed will retrieve real data from the db we just created.
+
+* Switch over to Feed.js in our src folder and update const tweets to
+	```
+	    const tweets = useQuery({
+	    operationName: 'GetTweets',
+	    liveQuery: true,
+	    requiresAuthentication: false
+	  });
+	```
+* Next within Feed.js update the line within our div tag that calls .map() to
+	```
+		{getTweets.data?.tweets_findManytweets?.map((tweet) => (
+		<Post
+		  displayName={tweet.displayName}
+		  username={tweet.username}
+		  verified={tweet.verified}
+		  text={tweet.text}
+		  avatar={tweet.avatar}
+		  image={tweet.image}
+		  key={tweet.id}
+		/>
+      		))}
+	```
+	
   
  
