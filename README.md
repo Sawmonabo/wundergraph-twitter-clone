@@ -65,7 +65,46 @@ While the application is still running on localhost:3000 go ahead and open up th
   ```js
   npx create-wundergraph-app twitter-clone -E simple
   ```
-
+* Now we need to move our .wundergraph folder, tsconfig.json, and our .gitignore all from the generated twitter-clone folder to our root dierctory of our project ```./```
+* Next, we need to install our wundergraph dependecnies using the commands
+```
+  npm i @wundergraph/sdk
+  npm i @wundergraph/swr
+  npm i graphql
+  npm i typescript --save-dev
+```
+* In our package.json add these two entries 
+```
+  "wundergraph": "wunderctl up --debug",
+  "generate": "wunderctl generate up --debug"
+```
+* After completeing these steps we can remove the generated twitter-clone folder 
+```
+  rm -rf twitter-clone
+ ```
+ * Lastly, we want to update our file wundergraph.config.ts located in the .wundergraph folder 
+ 
+ ...FROM 
+ ```
+ allowedOrigins:
+			process.env.NODE_ENV === 'production'
+				? [
+						// change this before deploying to production to the actual domain where you're deploying your app
+						'http://localhost:3000',
+				  ]
+				: ['http://localhost:3000', new EnvironmentVariable('WG_ALLOWED_ORIGIN')],
+ ```
+ 
+...TO
+```
+allowedOrigins:
+			process.env.NODE_ENV === 'production'
+				? [
+						// change this before deploying to production to the actual domain where you're deploying your app
+						'http://localhost:3000',
+				  ]
+				: ['http://localhost:3000'],
+```
 ## MongoDB INIT
 
 
