@@ -7,8 +7,8 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 - [Twitter INIT](#twitter-init)
 - [WunderGraph INIT](#wundergraph-init)
 - [MongoDB INIT](#mongodb-init)
-  - [Initializing Twitter-Clone with WunderGraph Database Operations](#initializing-twitter-clone-with-wundergraph-database-operations) 
-- [Implementing WunderGraph into Twitter-Clone](#implementing-wundergraph-into-twitter-clone)
+  - [Configuring WunderGraph Operations](#configuring-wundergraph-operations) 
+- [Implementing WunderGraph Operations into Twitter-Clone](#implementing-wundergraph-operations-into-twitter-clone)
 
 ## Twitter INIT
 * First step to creating our Twitter clone is by opening up your terminal and cloning our repo using:
@@ -196,7 +196,7 @@ allowedOrigins:
 			}
 		```
 
-### Initializing Twitter-Clone with WunderGraph Database Operations
+### Configuring WunderGraph Operations
 	
 * Within our src directory we need to create a folder named 'lib'. Once added, create a file inside of lib called wundergraph.ts. Now we should be on the path 'src/lib/wundergraph.ts'. Within the file add the following contents:
 	```
@@ -216,11 +216,11 @@ allowedOrigins:
 		} = createHooks<Operations>(client)
 	```
 <p> If we take a look at the jsonchema.ts file in src/components/generated and look for the
-findManytweets query, that will be the one we use in our manually defined operation.
+findManytweets query and createOnetweets mutation, that will be the two we use in our manually defined operation.
 	
-* Lets create our first operation using Wundergraph. 
+* Lets create our operations using Wundergraph. 
 	1. Move into the directory .wundergraph/operations on the root directory.
-	2. Create a new file named 'GetTweets.graphql and create the query function
+	2. Create a new file named 'GetTweets.graphql' and create the query function
 		```
 		  query GetTweets {
 		    tweets_findManytweets {
@@ -235,12 +235,28 @@ findManytweets query, that will be the one we use in our manually defined operat
 		    }
 		}
 		```
-* Now that the operation is written, run a ```wunderctl generate``` again to initialize our query funciton with WunderGraph.
+	3. Additionaly, create another file named 'AddTweet.graphql' and create the mutation function
+		```
+			mutation AddTweet($data: tweets_tweetsCreateInput!) {
+			    tweets_createOnetweets(data: $data) 
+			    {
+				id
+				displayName
+				username
+				verified
+				text
+				avatar
+				image
+				date
+			    }
+			}
+		```
+* Now that the operation is written, run a ```wunderctl generate``` again to initialize our query/mutation funcitons with WunderGraph.
 
 
 ## Implementing WunderGraph into Twitter-Clone
 
-<p>Now we can add the call to useQuery into Feed.js so that our feed will retrieve real data from the db we just created.
+<p>Now we can add the calls to useQuery/useMutation from src/lib/wundergraph.ts into Feed.js and TweetBox.js. Adding these operations will allow our twitter feed to retrieve real data and create tweets with the db we just created.
 
 * Switch over to Feed.js in our src folder and update const tweets to
 	```
@@ -264,11 +280,34 @@ findManytweets query, that will be the one we use in our manually defined operat
 		/>
 	))}
 	```
+* Now switch over to TweetBox.js and update the sendTweet function to 
+	```
+	    const sendTweet = e => {
+	    e.preventDefault();
+
+	    if (tweetMessage) {
+	      trigger({
+		data: {
+		  displayName: user.firstName,
+		  username: user.firstName + '_' + user.lastName,
+		  verified: true,
+		  text: tweetMessage,
+		  avatar: user.avatarUrl,
+		  image: tweetImage,
+		  date: new Date()
+		}
+	      });
+	    }
+
+	    setTweetMessage('');
+	    setTweetImage('');
+	  };
+	```
 	
 * Lastly, create an .env file in your root dir with contents:
   ``` GENERATE_SOURCEMAP=false ```
 	
-* Let's check the results of the following by running ``` wunderctl up --debug ``` and once it loaded create a new terminal window and run ```npm start``` . You should now see our twitter feed now includes our tweet document we created withion our MongoDB database previously.
+* Let's check the results of the following by running ``` wunderctl up --debug ``` and once it loaded create a new terminal window and run ```npm start``` . You should now see our twitter feed now includes our tweet document we created within our MongoDB database previously. You should now also be able to create a tweet and see it automatically upload into our twitter feed and MongoDB.
 	
   
  
