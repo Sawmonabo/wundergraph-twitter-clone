@@ -7,8 +7,8 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 - [Twitter INIT](#twitter-init)
 - [WunderGraph INIT](#wundergraph-init)
 - [MongoDB INIT](#mongodb-init)
-  - [Initializing our Twitter Feed with Live Query](#initializing-our-twitter-feed-with-live-query) 
-- [Integreating WunderGraph with our Twitter-Clone](#integreating-wundergraph-with-our-twitter-clone)
+  - [Initializing Twitter-Clone with WunderGraph Database Operations](#initializing-twitter-clone-with-wundergraph-database-operations) 
+- [Implementing WunderGraph into Twitter-Clone](#implementing-wundergraph-into-twitter-clone)
 
 ## Twitter INIT
 * First step to creating our Twitter clone is by opening up your terminal and cloning our repo using:
@@ -196,7 +196,7 @@ allowedOrigins:
 			}
 		```
 
-### Initializing our Twitter Feed with Live Query
+### Initializing Twitter-Clone with WunderGraph Database Operations
 	
 * Within our src directory we need to create a folder named 'lib'. Once added, create a file inside of lib called wundergraph.ts. Now we should be on the path 'src/lib/wundergraph.ts'. Within the file add the following contents:
 	```
@@ -238,7 +238,7 @@ findManytweets query, that will be the one we use in our manually defined operat
 * Now that the operation is written, run a ```wunderctl generate``` again to initialize our query funciton with WunderGraph.
 
 
-## Integreating WunderGraph with our Twitter-Clone
+## Implementing WunderGraph into Twitter-Clone
 
 <p>Now we can add the call to useQuery into Feed.js so that our feed will retrieve real data from the db we just created.
 
