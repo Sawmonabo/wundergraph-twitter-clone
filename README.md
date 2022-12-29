@@ -16,36 +16,36 @@ Prepared by: Sawmon Abossedgh and Jay Patel
 
 ## Twitter INIT
 * First step to creating our Twitter clone is by opening up your terminal and cloning our repo using:
-  ```js
+  ```
   git clone https://github.com/Sawmonabo/wundergraph-twitter-clone.git
   ```
-* Once you clone the repo you're going to want to run the command ``` npm i ``` to download our current dependencies from our package.json
-* After installing the dependencies, go ahead and start the application with ``` npm start ``` to see what we have so far.
+* Once you clone the repo you're going to want to run the command `npm i` to download our current dependencies from our package.json
+* After installing the dependencies, go ahead and start the application with `npm start` to see what we have so far.
 
 <p> As you can see this will load up the skeleton structure of the Twitter-Clone. Before moving forward, lets take a look at `Feed.js` located within our src folder. In the code snippet below, we are creating a const named tweets where we are currently assigning hard-coded values to it and inserting it onto our twitter feed.
   
-```  
-  const tweets = [{
-    displayName : "Test User",
-    username : "testuser",
-    verified : true,
-    text : "This is the first tweet!",
-    avatar : null,
-    image : null
-  }];
+```js
+const tweets = [{
+	displayName : "Test User",
+	username : "testuser",
+	verified : true,
+	text : "This is the first tweet!",
+	avatar : null,
+	image : null
+}];
 ```
 In `TweetBox.js`, also within the src folder, is where users will be creating/sending their tweets. Once again, we are currently assigning hard-coded values to our user attributes
-```
-	const user = {
-		avatarUrl : "",
-		email : "testuser@test.com",
-		firstName : "Test",
-		lastName : "User",
-		name : "Test User",
-	};
+```js
+const user = {
+	avatarUrl : "",
+	email : "testuser@test.com",
+	firstName : "Test",
+	lastName : "User",
+	name : "Test User",
+};
 ```
 and then capturing the input message or image url from the front-end to our sendTweet const that acts as our onClick method. 
-```
+```js
 const sendTweet = e => {
 e.preventDefault();
 
@@ -56,50 +56,49 @@ if (tweetMessage) {
 
 setTweetMessage('');
 setTweetImage('');
-  };
+};
 ```
 While the application is still running on localhost:3000, go ahead and open up the Chrome dev tools console. If you type in a message and click Tweet you'll be able to see the console log our input to the TweetBox upon clicking the tweet button.
-
 
 ## WunderGraph INIT
 <p>Now that we have setup our skeleton structure for our Twitter-Clone let's move on to adding WunderGraph to our application to help simpilify our lives.
 
 * First, let's start with opening up our terminal and typing the command:
-  ```js
-  npx create-wundergraph-app twitter-clone -E simple
-  ```
+```
+npx create-wundergraph-app twitter-clone -E simple
+```
 * Now we need to move our `.wundergraph` folder, `tsconfig.json`, and our `.gitignore` all from the generated twitter-clone folder to our root dierctory of our project `/`
 * Next, we need to install our WunderGraph dependencies using the commands
 ```
-  npm i @wundergraph/sdk
-  npm i @wundergraph/swr
-  npm i graphql
-  npm i typescript --save-dev
+npm i @wundergraph/sdk
+npm i @wundergraph/swr
+npm i graphql
+npm i typescript --save-dev
 ```
 * In our package.json add these two entries 
 ```
-  "wundergraph": "wunderctl up --debug",
-  "generate": "wunderctl generate up --debug"
+"wundergraph": "wunderctl up --debug",
+"generate": "wunderctl generate up --debug"
 ```
 * After completeing these steps we can remove the generated twitter-clone folder 
 ```
-  rm -r twitter-clone
- ```
+rm -r twitter-clone
+```
  * Lastly, we want to update our file `wundergraph.config.ts` located in the `.wundergraph` folder 
  
  _From:_
- ```
- allowedOrigins:
+```js
+allowedOrigins:
 	process.env.NODE_ENV === 'production'
 		? [
 			// change this before deploying to production to the actual domain where you're deploying your app
 			'http://localhost:3000',
-		  ]
+			]
 		: ['http://localhost:3000', new EnvironmentVariable('WG_ALLOWED_ORIGIN')],
- ```
+```
  
 _To:_
-```
+```js
 allowedOrigins:
 	process.env.NODE_ENV === 'production'
 		? [
@@ -129,7 +128,7 @@ allowedOrigins:
 <p> Before leaving the MongoDB website, let's create a document for our twitter feed to represent an existing tweet.
 	
 * Click Create and then insert a document
-	```
+	```js
 	{"_id":
 		{"$oid":"63816aaad38a36c5cfddaf06"},
 		"displayName":"Test User",
@@ -147,7 +146,7 @@ allowedOrigins:
 	
 	1. For the new db...replace countries with: 
 
-		```
+		```js
 		const tweets = introspect.mongodb({
 		apiNamespace: 'tweets',
 		databaseURL: 'mongodb+srv://user:pass@cluster0.uvkwxgc.mongodb.net/TweetsCollection',
@@ -159,7 +158,7 @@ allowedOrigins:
 	
 	2. Update our apis array in config to:
 	
-		```
+		```js
 		apis: [tweets],
 		```
 * Second, after updating our WG config we need to run WunderGraph's amazing 'generate' command to initialize the setup. In your terminal, run the following command `wunderctl generate`
@@ -179,7 +178,7 @@ allowedOrigins:
 	
 	2. Add the following content to your prisma file, this tells prisma the datatypes for your MongoDB document properties:
 	
-		```
+		```js
 			datasource db {
 			    provider = "mongodb"
 			    url      = "mongodb+srv://user:pass@cluster0.jzgqp26.mongodb.net/Tweets"
@@ -200,7 +199,7 @@ allowedOrigins:
 ### Configuring WunderGraph Operations
 	
 * Within our `src` directory, we need to create a folder named `lib`. Once added, create a file inside of lib called `wundergraph.ts`. Now we should be on the path `src/lib/wundergraph.ts`. Within the file add the following contents:
-	```
+	```js
 	import { createClient, Operations } from '../components/generated/client';
 
 	import { createHooks } from '@wundergraph/swr';
@@ -222,7 +221,7 @@ allowedOrigins:
 * Let's create our operations using WunderGraph. 
 	1. Move into the directory `.wundergraph/operations` on the root directory.
 	2. Create a new file named `GetTweets.graphql` and create the query function
-		```
+		```js
 		  query GetTweets {
 		    tweets_findManytweets {
 		      id
@@ -237,7 +236,7 @@ allowedOrigins:
 		}
 		```
 	3. Additionaly, create another file named `AddTweet.graphql` and create the mutation function
-		```
+		```js
 		mutation AddTweet($data: tweets_tweetsCreateInput!) {
 				tweets_createOnetweets(data: $data) 
 				{
@@ -259,7 +258,7 @@ allowedOrigins:
 <p>Now we can add the calls to the `useQuery`/`useMutation` React hooks from `src/lib/wundergraph.ts` into `Feed.js` and `TweetBox.js`. Adding these operations will allow our twitter feed to retrieve live data and create tweets with the db we just created.
 
 * Switch over to `Feed.js` in our `src` folder and update `const tweets` to
-	```
+	```js
 	const tweets = useQuery({
 		operationName: 'GetTweets',
 		liveQuery: true,
@@ -267,7 +266,7 @@ allowedOrigins:
 	});
 	```
 * Next within `Feed.js` update the line within our <div> tag that calls .map() to
-	```
+	```js
 	{tweets.data?.tweets_findManytweets?.map((tweet) => (
 		<Post
 			displayName={tweet.displayName}
@@ -281,7 +280,7 @@ allowedOrigins:
 	))}
 	```
 * Now switch over to `TweetBox.js` and add the mutation operation, as well as update the `sendTweet` function to 
-	```
+	```js
 	# add import:
 	import { useMutation } from './lib/wundergraph';
 
@@ -315,10 +314,9 @@ allowedOrigins:
 * Lastly, create an .env file in your root dir with contents: `GENERATE_SOURCEMAP=false`
 	- Note: this just suppresses some warnings that tend to show up during your React app starting.
 	
-* Let's check the results of the following by running `wunderctl up --debug` and once it loaded create a new terminal window and run ```npm start```. 
+* Let's check the results of the following by running `wunderctl up --debug` and once it loaded create a new terminal window and run `npm start`. 
 <p>You should now see our twitter feed now includes our tweet document we created within our MongoDB database previously. You should now also be able to create a tweet and see it automatically upload into our twitter feed and MongoDB.
 	
-  
 ## Auth0 INIT
 	
 <p> To get started with the MongoDB INIT we need to first start by creating an account or signing in with your existing account on [Auth0](https://auth0.auth0.com/u/login/identifier?state=hKFo2SBQZ3RaREhZTFNkbU1VQ250Z054UGItVmVVeTNOZWpmZKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDZfaVlSRFMwNXo5b0w3aXhLVUlGOTE2QkNtaVZUeFV4o2NpZNkgYkxSOVQ1YXI2bkZ0RE80ekVyR1hkb3FNQ000aU5aU1Y)
@@ -345,7 +343,7 @@ allowedOrigins:
 
 * Update the `wundergraph.config.ts` file located in the `.wundergraph` folder
  
-	 ```
+	 ```js
 	 	authentication: {
 			cookieBased: {
 			providers: [
@@ -368,7 +366,7 @@ allowedOrigins:
 	
 	1. `LoginButton.js` and `LoginButton.css`
 	
-		```
+		```js
 		// LoginButton.js
 
 		import React from 'react';
@@ -411,7 +409,7 @@ allowedOrigins:
 	
 	2. `LogoutButton.js` and `LogoutButton.css`
 	
-		```
+		```js
 		// LogoutButton.js
 
 		import React from 'react';
@@ -448,7 +446,7 @@ allowedOrigins:
 	
 	3. `Auth.js` and `Auth.css`
 	
-		```
+		```js
 		// Auth.js
 
 		import React from 'react';
@@ -521,7 +519,7 @@ allowedOrigins:
 
 <p>After creating the Auth0 components, we need to update our `App.js` within our `src` directory to configure Auth0 login/logout. We can now also capture the user attributes from Auth0 using our WunderGraph hooks with useUser().
 	
-	```
+	```js
 	import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 	import { useUser } from './lib/wundergraph';
 	import React from 'react';
@@ -553,7 +551,7 @@ allowedOrigins:
 	```
 
 * Open up `Sidebar.js`, and we should include the `LogoutButton.js` and add it to the Sidebar view so that we can log out cleanly:
-```
+```js
 import React from 'react';
 ...
 import LogoutButton from './auth0_components/LogoutButton';
@@ -565,7 +563,7 @@ import './Sidebar.css';
 
 
 * Our final step is to switch over to `TweetBox.js` within our `src` directory and update our hard-coded user information to use user information from our generated cookie upon login.
-	```
+	```js
 	# add to our existing import useUser:
 	import { useUser, useMutation } from './lib/wundergraph';
 
