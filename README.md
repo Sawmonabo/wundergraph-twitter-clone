@@ -168,7 +168,7 @@ allowedOrigins:
 	* Run this command in your terminal: 
 	
 	`wunderctl introspect mongodb mongodb+srv://<your-username>:<your-password>@cluster0.uvkwxgc.mongodb.net/<your-database-name>`
-		- Make sure to replace the `uvkwxgc` with your own cluster address
+		* Make sure to replace the `uvkwxgc` with your own cluster address
 	
 * Fourth, after running our introspection, we need to create our prisma schema.
 	
