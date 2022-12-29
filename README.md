@@ -148,11 +148,11 @@ allowedOrigins:
 
 		```js
 		const tweets = introspect.mongodb({
-		apiNamespace: 'tweets',
-		databaseURL: 'mongodb+srv://user:pass@cluster0.uvkwxgc.mongodb.net/TweetsCollection',
-		introspection : {
-			pollingIntervalSeconds: 5,
-			},
+			apiNamespace: 'tweets',
+			databaseURL: 'mongodb+srv://user:pass@cluster0.uvkwxgc.mongodb.net/TweetsCollection',
+			introspection : {
+				pollingIntervalSeconds: 5,
+				},
 		});
 		```
 	
