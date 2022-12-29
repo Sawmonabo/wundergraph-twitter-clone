@@ -169,7 +169,7 @@ allowedOrigins:
 	
 	`wunderctl introspect mongodb mongodb+srv://<your-username>:<your-password>@cluster0.uvkwxgc.mongodb.net/<your-database-name>`
 		
-		1. Note: make sure to replace the `uvkwxgc` with your own cluster address
+	1. Note: make sure to replace the `uvkwxgc` with your own cluster address
 	
 * Fourth, after running our introspection, we need to create our prisma schema.
 	
