@@ -280,7 +280,7 @@ allowedOrigins:
 	```
 * Now switch over to `TweetBox.js` and add the mutation operation, as well as update the `sendTweet` function to 
 	```js
-	# add import:
+	// add import:
 	import { useMutation } from './lib/wundergraph';
 
 	const { trigger } = useMutation({
