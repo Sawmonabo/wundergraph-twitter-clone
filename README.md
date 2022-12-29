@@ -167,7 +167,7 @@ allowedOrigins:
 	
 	* Run this command in your terminal: 
 	
-	`wunderctl introspect mongodb mongodb+srv://<your-username>:<your-password>@cluster0.uvkwxgc.mongodb.net/<your-database-name>`
+		`wunderctl introspect mongodb mongodb+srv://<your-username>:<your-password>@cluster0.uvkwxgc.mongodb.net/<your-database-name>`
 		
 	1. Note: make sure to replace the `uvkwxgc` with your own cluster address
 	
