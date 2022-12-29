@@ -47,15 +47,15 @@ const user = {
 and then capturing the input message or image url from the front-end to our sendTweet const that acts as our onClick method. 
 ```js
 const sendTweet = e => {
-e.preventDefault();
+	e.preventDefault();
 
-if (tweetMessage) {
-  console.log(`Sending tweet with message: ${tweetMessage}`);
-  console.log(`Sending tweet with image: ${tweetImage}`);
-}
+	if (tweetMessage) {
+		console.log(`Sending tweet with message: ${tweetMessage}`);
+		console.log(`Sending tweet with image: ${tweetImage}`);
+	}
 
-setTweetMessage('');
-setTweetImage('');
+	setTweetMessage('');
+	setTweetImage('');
 };
 ```
 While the application is still running on localhost:3000, go ahead and open up the Chrome dev tools console. If you type in a message and click Tweet you'll be able to see the console log our input to the TweetBox upon clicking the tweet button.
@@ -170,6 +170,7 @@ allowedOrigins:
 	```
 	wunderctl introspect mongodb mongodb+srv://<your-username>:<your-password>@cluster0.uvkwxgc.mongodb.net/<your-database-name>
 	```
+	
 		- Make sure to replace the `uvkwxgc` with your own cluster address
 	
 * Fourth, after running our introspection, we need to create our prisma schema.
@@ -179,21 +180,21 @@ allowedOrigins:
 	2. Add the following content to your prisma file, this tells prisma the datatypes for your MongoDB document properties:
 	
 		```js
-			datasource db {
-			    provider = "mongodb"
-			    url      = "mongodb+srv://user:pass@cluster0.jzgqp26.mongodb.net/Tweets"
-			  }
-
-			model Tweets {
-				id          String   @id @default(auto()) @map("_id") @db.ObjectId
-				displayName String
-				username    String
-				verified    Boolean
-				text        String
-				avatar      String?
-				image       String?
-				date        DateTime @default(now())
+		datasource db {
+				provider = "mongodb"
+				url      = "mongodb+srv://user:pass@cluster0.jzgqp26.mongodb.net/Tweets"
 			}
+
+		model Tweets {
+			id          String   @id @default(auto()) @map("_id") @db.ObjectId
+			displayName String
+			username    String
+			verified    Boolean
+			text        String
+			avatar      String?
+			image       String?
+			date        DateTime @default(now())
+		}
 		```
 
 ### Configuring WunderGraph Operations
@@ -222,33 +223,33 @@ allowedOrigins:
 	1. Move into the directory `.wundergraph/operations` on the root directory.
 	2. Create a new file named `GetTweets.graphql` and create the query function
 		```js
-		  query GetTweets {
-		    tweets_findManytweets {
-		      id
-		      displayName
-		      username
-		      verified
-		      text
-		      avatar
-		      image
-		      date
-		    }
+		query GetTweets {
+			tweets_findManytweets {
+				id
+				displayName
+				username
+				verified
+				text
+				avatar
+				image
+				date
+			}
 		}
 		```
 	3. Additionaly, create another file named `AddTweet.graphql` and create the mutation function
 		```js
 		mutation AddTweet($data: tweets_tweetsCreateInput!) {
-				tweets_createOnetweets(data: $data) 
-				{
-			id
-			displayName
-			username
-			verified
-			text
-			avatar
-			image
-			date
-				}
+			tweets_createOnetweets(data: $data) 
+			{
+				id
+				displayName
+				username
+				verified
+				text
+				avatar
+				image
+				date
+			}
 		}
 		```
 * Now that the operation is written, run a `wunderctl generate` again to initialize our query/mutation functions with WunderGraph.
@@ -292,19 +293,19 @@ allowedOrigins:
 	const sendTweet = e => {
 	e.preventDefault();
 
-			if (tweetMessage) {
-				trigger({
-		data: {
-			displayName: user.firstName,
-			username: user.firstName + '_' + user.lastName,
-			verified: true,
-			text: tweetMessage,
-			avatar: user.avatarUrl,
-			image: tweetImage,
-			date: new Date()
-		}
-				});
+	if (tweetMessage) {
+		trigger({
+			data: {
+				displayName: user.firstName,
+				username: user.firstName + '_' + user.lastName,
+				verified: true,
+				text: tweetMessage,
+				avatar: user.avatarUrl,
+				image: tweetImage,
+				date: new Date()
 			}
+		});
+	}
 
 	setTweetMessage('');
 	setTweetImage('');
@@ -322,17 +323,20 @@ allowedOrigins:
 <p> To get started with the MongoDB INIT we need to first start by creating an account or signing in with your existing account on [Auth0](https://auth0.auth0.com/u/login/identifier?state=hKFo2SBQZ3RaREhZTFNkbU1VQ250Z054UGItVmVVeTNOZWpmZKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDZfaVlSRFMwNXo5b0w3aXhLVUlGOTE2QkNtaVZUeFV4o2NpZNkgYkxSOVQ1YXI2bkZ0RE80ekVyR1hkb3FNQ000aU5aU1Y)
 
  <p>After creating or signing into your Auth0 acount follow these steps:
-	 
+ 
 	1. Go to Auth0 and create a new application of type "Regular Web Application"
 	2. Skip the Quickstart
 	3. Copy the Issuer, Client ID and Client Secret to the clipboard
 	4. Update the .env with the following details:
+	
 	```
 	AUTH0_ISSUER=<Issuer>
 	AUTH0_CLIENT_ID=<Client ID>
 	AUTH0_CLIENT_SECRET=<Client Secrect>
 	```
+	
 		- Note: Issuer should start with `https://`
+		
 	5. Paste the credentials into the `.env` file
 	6. Set the Callback URL on Auth0 to http://localhost:9991/auth/cookie/callback/auth0
 	
@@ -343,21 +347,21 @@ allowedOrigins:
 
 * Update the `wundergraph.config.ts` file located in the `.wundergraph` folder
  
-	 ```js
-	 	authentication: {
-			cookieBased: {
-			providers: [
-			authProviders.openIdConnect({
-				id: 'auth0',
-				issuer: new EnvironmentVariable('AUTH0_ISSUER'),
-				clientId: new EnvironmentVariable('AUTH0_CLIENT_ID'),
-				clientSecret: new EnvironmentVariable('AUTH0_CLIENT_SECRET')
-			})
-		      ],
-			 authorizedRedirectUris: ['http://localhost:3000/', 'http://127.0.0.1:3000/'],
-			},
+	```js
+	authentication: {
+		cookieBased: {
+		providers: [
+		authProviders.openIdConnect({
+			id: 'auth0',
+			issuer: new EnvironmentVariable('AUTH0_ISSUER'),
+			clientId: new EnvironmentVariable('AUTH0_CLIENT_ID'),
+			clientSecret: new EnvironmentVariable('AUTH0_CLIENT_SECRET')
+		})
+				],
+		 authorizedRedirectUris: ['http://localhost:3000/', 'http://127.0.0.1:3000/'],
 		},
-	 ```
+	},
+	```
 
 ## Implementing WunderGraph Auth0 into Twitter-Clone
 <p> To get started, we need to create a new folder within our `src` directory named `auth0_components`.
@@ -519,36 +523,36 @@ allowedOrigins:
 
 <p>After creating the Auth0 components, we need to update our `App.js` within our `src` directory to configure Auth0 login/logout. We can now also capture the user attributes from Auth0 using our WunderGraph hooks with useUser().
 	
-	```js
-	import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-	import { useUser } from './lib/wundergraph';
-	import React from 'react';
-	import Home from './Home';
-	import Auth from './auth0_components/Auth';
-	import './App.css';
+```js
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useUser } from './lib/wundergraph';
+import React from 'react';
+import Home from './Home';
+import Auth from './auth0_components/Auth';
+import './App.css';
 
-	const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
-	function App () {
-		const user = useUser();
+function App () {
+	const user = useUser();
 
-		if (user.data) {
-			return (
-				<QueryClientProvider client={queryClient}>
-		<Home />
-				</QueryClientProvider>
-			);
-		} else {
-			return (
-				<QueryClientProvider client={queryClient}>
-		<Auth />
-				</QueryClientProvider>
-			);
-		}
+	if (user.data) {
+		return (
+			<QueryClientProvider client={queryClient}>
+	<Home />
+			</QueryClientProvider>
+		);
+	} else {
+		return (
+			<QueryClientProvider client={queryClient}>
+	<Auth />
+			</QueryClientProvider>
+		);
 	}
+}
 
-	export default App;
-	```
+export default App;
+```
 
 * Open up `Sidebar.js`, and we should include the `LogoutButton.js` and add it to the Sidebar view so that we can log out cleanly:
 ```js
