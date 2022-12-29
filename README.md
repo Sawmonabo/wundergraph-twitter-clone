@@ -180,7 +180,7 @@ allowedOrigins:
 		```js
 		datasource db {
 				provider = "mongodb"
-				url      = "mongodb+srv://user:pass@cluster0.jzgqp26.mongodb.net/Tweets"
+				url      = "mongodb+srv://<your-username>:<your-password>@cluster0.<your-cluster-hash>.mongodb.net/<your-database-name>"
 			}
 
 		model Tweets {
