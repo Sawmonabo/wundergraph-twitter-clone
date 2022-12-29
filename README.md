@@ -566,10 +566,10 @@ import './Sidebar.css';
 
 * Our final step is to switch over to `TweetBox.js` within our `src` directory and update our hard-coded user information to use user information from our generated cookie upon login.
 	```js
-	# add to our existing import useUser:
+	// add to our existing import useUser:
 	import { useUser, useMutation } from './lib/wundergraph';
 
-	# replace the const user with:
+	// replace the const user with:
 	const user = useUser().data;
 	```
 	
