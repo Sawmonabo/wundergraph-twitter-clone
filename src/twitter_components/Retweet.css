@@ -1,0 +1,24 @@
+.retweetOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+  }
+  .retweetOption:hover {
+    background-color: rgb(196, 244, 196);
+    color: green;
+    transition: color 100ms ease-out;
+  }
+  .retweetOption > .MuiSvgIcon-root {
+    padding: 5px;
+  }
+  .retweetOption > h2 {
+    font-weight: 700;
+    font-size: 10px;
+    margin-right: 0px;
+  }
+  .retweetOption--active {
+    color: green;
+  }

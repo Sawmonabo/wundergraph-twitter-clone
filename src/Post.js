@@ -7,6 +7,10 @@ import {
   Repeat,
   VerifiedUser
 } from '@mui/icons-material';
+import Like from './twitter_components/Like';
+import ChatBubble from './twitter_components/ChatBubble';
+import Retweet from './twitter_components/Retweet';
+import Share from './twitter_components/Share';
 import './Post.css';
 
 function Post ({ displayName, username, verified, text, image, avatar }) {
@@ -31,10 +35,10 @@ function Post ({ displayName, username, verified, text, image, avatar }) {
         </div>
         <img src={image} alt='' />
         <div className='post__footer'>
-          <ChatBubbleOutline fontSize='small' />
-          <Repeat fontSize='small' />
-          <FavoriteBorder fontSize='small' />
-          <Publish fontSize='small' />
+          <ChatBubble Icon={ChatBubbleOutline} />
+          <Retweet Icon={Repeat} active={false}/>
+          <Like Icon={FavoriteBorder} active={false}/>
+          <Share Icon={Publish} />
         </div>
       </div>
     </div>

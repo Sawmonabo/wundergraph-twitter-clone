@@ -1,0 +1,25 @@
+.likeOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+  }
+  .likeOption:hover {
+    background-color: rgb(246, 165, 165);;
+    color: red;
+    transition: color 100ms ease-out;
+  }
+  .likeOption > .MuiSvgIcon-root {
+    padding: 5px;
+  }
+  .likeOption > h2 {
+    font-weight: 700;
+    font-size: 10px;
+    margin-right: 0px;
+  }
+  .likeOption--active {
+    color: red;
+  }
+  

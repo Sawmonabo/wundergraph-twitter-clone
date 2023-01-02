@@ -1,0 +1,24 @@
+.chatBubbleOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+  }
+  .chatBubbleOption:hover {
+    background-color: #c1ddf1;
+    color: var(--twitter-color);
+    transition: color 100ms ease-out;
+  }
+  .chatBubbleOption > .MuiSvgIcon-root {
+    padding: 5px;
+  }
+  .chatBubbleOption > h2 {
+    font-weight: 700;
+    font-size: 10px;
+    margin-right: 0px;
+  }
+  .chatBubbleOption--active {
+    color: var(--twitter-color);
+  }
